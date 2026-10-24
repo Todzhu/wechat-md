@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生信大杂烩 · 微信公众号排版工作台 (Claude UI Edition)</title>
-  <link rel="stylesheet" href="/style.css?v=3.5" />
+  <title>WeChat-MD · 微信公众号排版工作台</title>
+  <link rel="stylesheet" href="/style.css?v=3.6" />
   <!-- 代码高亮配色已由 app.js 转为内联 style（粘贴到微信不丢色），无需再加载 hljs 主题 CSS -->
   <!-- Markdown-it & Highlight.js -->
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
@@ -45,7 +45,7 @@
             <path d="M12 2v20M17 5l-10 14M22 12H2M19 17L5 7"/>
           </svg>
         </div>
-        <span class="brand-title">生信大杂烩 · Studio</span>
+        <span class="brand-title">WeChat-MD · Studio</span>
       </div>
       <button class="icon-btn" id="btnCollapseSidebar" title="收起侧边栏，进入全屏沉浸写作模式">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -108,7 +108,7 @@
             <span class="theme-dot" style="background: #1A56DB;"></span>
             <div>
               <div class="theme-card-name">经典科研蓝</div>
-              <span class="theme-card-sub">生信大杂烩默认</span>
+              <span class="theme-card-sub">渐变左框默认</span>
             </div>
           </button>
           <button class="theme-card" data-theme="claude-terracotta">
@@ -363,7 +363,7 @@
             <div class="wx-article-title" id="wxSimTitle" contenteditable="true" spellcheck="false" data-placeholder="点击输入文章标题（或在正文首行写 # 标题）" title="点击可直接编辑标题"></div>
             <div class="wx-meta-row">
               <span class="wx-orig-tag" id="wxOrigTag" title="点击切换原创标识">原创</span>
-              <span class="wx-account-name" id="wxAccountName" contenteditable="true" spellcheck="false" title="点击可修改公众号名称">生信大杂烩</span>
+              <span class="wx-account-name" id="wxAccountName" contenteditable="true" spellcheck="false" title="点击可修改公众号名称">公众号名称</span>
               <span id="wxSimDate"></span>
               <span class="wx-location" id="wxLocation" contenteditable="true" spellcheck="false" title="点击可修改发布地区">发表于浙江</span>
             </div>
@@ -393,7 +393,7 @@
         <span>本地图片处理与微信公众号素材直传</span>
       </h3>
       <p>
-        当前文档中的本地路径图片（如 <code>E:/公众号相关/文献解读/figures/Figure_1.png</code>）已通过本地服务实时映射渲染。
+        当前文档中的本地路径图片（如 <code>./figures/Figure_1.png</code>）已通过本地服务实时映射渲染。
       </p>
       <div style="background: var(--bg-elevated); padding: 12px; border-radius: 10px; border: 1px solid var(--border-subtle); margin-bottom: 14px; font-size: 12.5px; line-height: 1.6;">
         <strong>方式一（默认免配置）：</strong> 勾选左侧栏「复制时自动内联本地图片」，点击复制时系统会自动将本地图片压缩为高清 JPEG Base64 嵌入剪贴板，支持直接粘贴。<br/>
@@ -425,6 +425,6 @@
     <span id="toastText">操作成功</span>
   </div>
 
-  <script src="/app.js?v=3.5"></script>
+  <script src="/app.js?v=3.6"></script>
 </body>
 </html>

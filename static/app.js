@@ -1,5 +1,5 @@
 /**
- * 生信大杂烩 · 微信公众号排版工作台 (Claude UI Edition v3.0)
+ * 微信公众号排版工作台 (WeChat-MD Studio · Claude UI Edition v3.0)
  * 核心前端逻辑：
  * 1. 6套科研与人文公众号主题定义（100% 内联 style 模板生成器，完美兼容微信公众号编辑器）
  * 2. Markdown-it + Highlight.js + MathJax 3 (SVG) 公式无损转换
@@ -16,7 +16,7 @@
 
 const THEMES = {
   "bioinfo-blue": {
-    name: "生信大杂烩 · 经典科研蓝",
+    name: "经典科研蓝",
     primary: "#1A56DB",
     softBg: "#EFF6FF",
     quoteBg: "#F4F8FD",
@@ -79,7 +79,7 @@ const THEMES = {
 
 // ======================= 全局状态与持久化 =======================
 const STORAGE_KEYS = {
-  settings: "wxmd.settings.v3",
+  settings: "wxmd.settings.v3.1",
   wechatUrls: "wxmd.wechatUrls.v3",
   draft: "wxmd.draft.v3"
 };
@@ -97,7 +97,7 @@ const DEFAULT_SETTINGS = {
   mode: "light",
   sidebarCollapsed: false,
   lastFile: "",
-  accountName: "生信大杂烩",
+  accountName: "公众号名称",
   location: "发表于浙江",
   showOrigTag: true,
   splitRatio: 50,
@@ -130,7 +130,7 @@ const state = {
   pendingNewName: "", // 导入/新建文档在首次保存时使用的文件名
   customTitle: "", // 用户在预览区手动填写的标题（当正文无 # 一级标题时生效）
   currentBaseDir: "",
-  workspaceDir: "E:/公众号相关/文献解读",
+  workspaceDir: "",
   savedContent: "", // 最近一次加载/保存的内容，用于判断是否有未保存修改
   uploadedWechatUrls: loadJSON(STORAGE_KEYS.wechatUrls, {}) // key: baseDir|src -> mmbiz URL
 };
@@ -583,7 +583,7 @@ function updateFileLabel() {
   label.classList.toggle("dirty", isDirty());
   const delBtn = $id("btnDeleteDoc");
   if (delBtn) delBtn.disabled = !state.currentFilePath;
-  document.title = `${isDirty() ? "● " : ""}${name} · 生信大杂烩排版工作台`;
+  document.title = `${isDirty() ? "● " : ""}${name} · WeChat-MD 排版工作台`;
 }
 
 let renderScheduled = false;
@@ -1056,7 +1056,7 @@ function syncSettingsUI() {
   $id("appSidebar").classList.toggle("collapsed", !!state.sidebarCollapsed);
   $id("wxAppId").value = state.appId || "";
   if ($id("wxAccountName") && document.activeElement !== $id("wxAccountName")) {
-    $id("wxAccountName").textContent = state.accountName || "生信大杂烩";
+    $id("wxAccountName").textContent = state.accountName || "公众号名称";
   }
   if ($id("wxLocation") && document.activeElement !== $id("wxLocation")) {
     $id("wxLocation").textContent = state.location || "发表于浙江";
@@ -1242,7 +1242,7 @@ function bindEvents() {
   // 预览区顶部公众号信息栏（标题、原创标识、公众号名、地区）直接点击编辑
   $id("wxOrigTag")?.addEventListener("click", () => updateSetting({ showOrigTag: !state.showOrigTag }, false));
   $id("wxAccountName")?.addEventListener("blur", (e) => {
-    const val = e.currentTarget.textContent.trim() || "生信大杂烩";
+    const val = e.currentTarget.textContent.trim() || "公众号名称";
     e.currentTarget.textContent = val;
     updateSetting({ accountName: val }, false);
   });

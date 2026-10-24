@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-生信大杂烩 · 微信公众号排版工作台 (Claude UI 风格)
+微信公众号排版工作台 (WeChat-MD Studio · Claude UI 风格)
 后端服务：提供本地 Markdown 文件扫描、读写、本地图片流映射、图片压缩转码及微信公众号官方素材库 API 对接
 
 v3.0 优化要点：
@@ -33,11 +33,9 @@ STATIC_DIR = STUDIO_DIR / "static"
 UPLOAD_DIR = STUDIO_DIR / "uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
-# 默认扫描的根目录（可通过环境变量覆盖；若预设目录不存在则回退到项目内 workspace 目录）
-_default_ws = Path(r"E:\公众号相关\文献解读")
-_default_root = Path(r"E:\公众号相关")
-WORKSPACE_DIR = Path(os.environ.get("WECHAT_MD_WORKSPACE") or (_default_ws if _default_ws.exists() else STUDIO_DIR / "workspace"))
-PARENT_DIR = Path(os.environ.get("WECHAT_MD_ROOT") or (_default_root if _default_root.exists() else WORKSPACE_DIR))
+# 默认扫描的根目录（可通过环境变量 WECHAT_MD_WORKSPACE / WECHAT_MD_ROOT 覆盖，默认使用项目内 workspace 目录）
+WORKSPACE_DIR = Path(os.environ.get("WECHAT_MD_WORKSPACE") or (STUDIO_DIR / "workspace"))
+PARENT_DIR = Path(os.environ.get("WECHAT_MD_ROOT") or WORKSPACE_DIR)
 WORKSPACE_DIR.mkdir(parents=True, exist_ok=True)
 
 TEXT_EXTS = {".md", ".markdown", ".txt"}
@@ -582,7 +580,7 @@ def run_server(port=8765, open_browser=False):
         return
     url = f"http://127.0.0.1:{port}"
     print("============================================================", flush=True)
-    print("  生信大杂烩 · 微信公众号排版工作台 (Claude UI Edition v3.0)", flush=True)
+    print("  微信公众号排版工作台 (WeChat-MD Studio v3.0)", flush=True)
     print(f"  服务已启动: {url}", flush=True)
     print(f"  默认工作区: {WORKSPACE_DIR}", flush=True)
     if not HAS_PIL:
