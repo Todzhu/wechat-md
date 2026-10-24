@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# 运行时上传与本地工作区文档
+uploads/*
+!uploads/.gitkeep
+workspace/*
+!workspace/.gitkeep
+
+# 临时与备份文件
+_backup_*/
+*.tmp
+.~*
+
+# 操作系统与编辑器
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
