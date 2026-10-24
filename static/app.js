@@ -1430,7 +1430,21 @@ window.addEventListener("DOMContentLoaded", async () => {
   $id("wxSimDate").textContent = new Date().toLocaleDateString("sv-SE"); // YYYY-MM-DD
   syncSettingsUI();
   bindEvents();
-  if (!mathJaxReady()) setRenderStatus("MathJax 公式引擎加载中...", "loading");
+  if (!mathJaxReady()) {
+    setRenderStatus("MathJax 公式引擎加载中...", "loading");
+    const mjCheck = setInterval(() => {
+      if (mathJaxReady()) {
+        clearInterval(mjCheck);
+        window.__onMathJaxReady();
+      }
+    }, 250);
+    setTimeout(() => {
+      clearInterval(mjCheck);
+      if (!mathJaxReady()) setRenderStatus("MathJax 加载失败，公式将以源码显示", "error");
+    }, 20000);
+  } else {
+    setRenderStatus("MathJax SVG 公式引擎与本地图片映射已就绪", "ready");
+  }
 
   try {
     const cfg = await fetchJSON("/api/config");
@@ -1447,9 +1461,4 @@ window.addEventListener("DOMContentLoaded", async () => {
   if (draft && !draft.path && draft.content && confirm("检测到上次未保存的新文档草稿，是否恢复？")) {
     setDocument({ content: draft.content, pendingName: draft.name || "", saved: false });
   }
-
-  // MathJax 兜底：若 15 秒后仍未就绪则提示
-  setTimeout(() => {
-    if (!mathJaxReady()) setRenderStatus("MathJax 加载失败，公式将以源码显示", "error");
-  }, 15000);
 });

@@ -1,6 +1,19 @@
-# WeChat-MD Studio — 微信公众号 & CSDN 开源 Markdown 排版工作台
+# WeChat-MD Studio — 微信公众号排版工作台
 
 **WeChat-MD Studio** 是一款轻量、开箱即用的本地开源微信公众号与 CSDN 博客 Markdown 排版工具。采用 **Claude 风格左侧控制台 + 右侧可调双栏实时预览（Artifacts）** 界面架构，提供 **100% 内联 CSS 富文本生成**、**LaTeX 数学公式转内联 SVG**、**代码块语法高亮内联化与 Mac 窗口顶栏**、**本地图片实时映射 / 自动压缩内联 / 微信官方图床直传** 等完整能力，解决 Markdown 创作者在微信公众号后台排版繁琐、公式变形、代码丢色、外链不可点击与图片上传麻烦等核心痛点。
+
+---
+
+## 界面预览
+
+### 1. 工作台全景（左侧控制台 + 可调双栏源码编辑与实时渲染）
+![WeChat-MD Studio 主界面全景](./docs/screenshots/studio-overview.png)
+
+### 2. 内置 6 套精选排版主题对比
+![6 套内置主题排版效果对比](./docs/screenshots/themes-showcase.png)
+
+### 3. 手机仿真视图（390px）与浅色 / 深色模式预览
+![手机仿真视图与浅色深色模式对比](./docs/screenshots/mobile-preview.png)
 
 ---
 
@@ -55,6 +68,8 @@ wechat-md/
 │   ├── index.html          # 工作台主界面（左侧设置栏 + 右侧可调双栏）
 │   ├── style.css           # 界面样式表与响应式布局
 │   └── app.js              # Markdown / MathJax / Highlight 内联渲染引擎与交互逻辑
+├── docs/
+│   └── screenshots/        # README 实机界面演示截图
 ├── workspace/              # 默认本地文档工作区目录（自动创建）
 └── uploads/                # 粘贴或上传图片的本地去重存储目录（自动创建）
 ```

@@ -824,6 +824,63 @@ body.resizing-panes * {
   color: #EAEAEA;
 }
 
+.wechat-device.dark-mode .wx-orig-tag {
+  background-color: #2A2A2A;
+  color: #9E9E9E;
+}
+
+.wechat-device.dark-mode .wx-account-name {
+  color: #7D90A9;
+}
+
+/* 仿真预览深色模式自适应（仅通过 CSS 覆盖预览视觉，不污染实际复制的 DOM 内联 style） */
+.wechat-device.dark-mode #wechatContentRoot > section,
+.wechat-device.dark-mode #wechatContentRoot p,
+.wechat-device.dark-mode #wechatContentRoot li,
+.wechat-device.dark-mode #wechatContentRoot td {
+  color: #D4D4D2 !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot h1,
+.wechat-device.dark-mode #wechatContentRoot h2,
+.wechat-device.dark-mode #wechatContentRoot h3,
+.wechat-device.dark-mode #wechatContentRoot h4 {
+  color: #F2F2F0 !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot h2 {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot blockquote {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot blockquote p {
+  color: #B8B8B5 !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot p code,
+.wechat-device.dark-mode #wechatContentRoot li code,
+.wechat-device.dark-mode #wechatContentRoot td code {
+  background-color: rgba(255, 255, 255, 0.11) !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot th {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: #333333 !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot td {
+  background-color: rgba(255, 255, 255, 0.02) !important;
+  border-color: #2E2E2E !important;
+}
+
+.wechat-device.dark-mode #wechatContentRoot section > svg,
+.wechat-device.dark-mode #wechatContentRoot span > svg {
+  color: #E8E8E6 !important;
+}
+
 .wx-meta-row {
   display: flex;
   align-items: center;

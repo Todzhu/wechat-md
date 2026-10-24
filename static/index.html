@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WeChat-MD · 微信公众号排版工作台</title>
-  <link rel="stylesheet" href="/style.css?v=3.7" />
+  <link rel="stylesheet" href="/style.css?v=3.8" />
   <!-- 代码高亮配色已由 app.js 转为内联 style（粘贴到微信不丢色），无需再加载 hljs 主题 CSS -->
   <!-- Markdown-it & Highlight.js -->
   <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
@@ -22,11 +22,9 @@
       },
       startup: {
         typeset: false,
-        // MathJax 就绪后通知 app.js 重新渲染公式（替代原轮询方式）
-        pageReady() {
-          return MathJax.startup.defaultPageReady().then(() => {
-            if (window.__onMathJaxReady) window.__onMathJaxReady();
-          });
+        ready() {
+          MathJax.startup.defaultReady();
+          if (window.__onMathJaxReady) window.__onMathJaxReady();
         }
       }
     };
@@ -425,6 +423,6 @@
     <span id="toastText">操作成功</span>
   </div>
 
-  <script src="/app.js?v=3.7"></script>
+  <script src="/app.js?v=3.8"></script>
 </body>
 </html>
