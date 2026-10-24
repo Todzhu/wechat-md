@@ -1,10 +1,10 @@
 /**
  * 微信公众号排版工作台 (WeChat-MD Studio · Claude UI Edition v3.0)
  * 核心前端逻辑：
- * 1. 6套科研与人文公众号主题定义（100% 内联 style 模板生成器，完美兼容微信公众号编辑器）
+ * 1. 6套公众号排版主题定义（100% 内联 style 模板生成器，完美兼容微信公众号编辑器）
  * 2. Markdown-it + Highlight.js + MathJax 3 (SVG) 公式无损转换
  * 3. 本地图片路径 (E:/... 或 ./figures/...) 自动映射与 Base64/微信素材库直传
- * 4. 外链自动转文末参考文献角标 [1] 与图注自动美化 (▲ 图 X)
+ * 4. 外链自动转文末参考角标 [1] 与图注自动美化 (▲ 图 X)
  *
  * v3.0 优化：
  * - 代码块/行内代码中的 $ 不再被误识别为公式（R 语言 df$col、Shell $PATH 等）
@@ -16,7 +16,7 @@
 
 const THEMES = {
   "bioinfo-blue": {
-    name: "经典科研蓝",
+    name: "经典科技蓝",
     primary: "#1A56DB",
     softBg: "#EFF6FF",
     quoteBg: "#F4F8FD",
@@ -26,7 +26,7 @@ const THEMES = {
       `margin: 30px 0 16px; padding: 8px 14px; border-left: 4px solid ${c}; background: linear-gradient(90deg, ${soft} 0%, rgba(255,255,255,0) 100%); font-size: 17px; font-weight: 700; color: #111827; line-height: 1.45; letter-spacing: 0.02em; border-radius: 0 6px 6px 0;`
   },
   "claude-terracotta": {
-    name: "Claude · 温暖人文陶土",
+    name: "人文陶土橙",
     primary: "#D97757",
     softBg: "#FAF0EC",
     quoteBg: "#FAF7F2",
@@ -36,7 +36,7 @@ const THEMES = {
       `margin: 30px 0 16px; padding: 6px 0 9px; border-bottom: 2px solid ${c}; font-family: Georgia, "Songti SC", "Noto Serif SC", serif; font-size: 18px; font-weight: 700; color: #141413; line-height: 1.45;`
   },
   "nature-emerald": {
-    name: "Cell / Nature · 翡翠学术绿",
+    name: "翡翠森系绿",
     primary: "#0D7A5F",
     softBg: "#ECFDF5",
     quoteBg: "#F2FBF7",
@@ -46,7 +46,7 @@ const THEMES = {
       `margin: 30px 0 16px; display: inline-block; padding: 6px 16px; background-color: ${c}; color: #FFFFFF; font-size: 16px; font-weight: 700; border-radius: 999px; box-shadow: 0 2px 6px rgba(13,122,95,0.22);`
   },
   "ai-violet": {
-    name: "前沿 AI · 极客紫",
+    name: "前沿极客紫",
     primary: "#6D28D9",
     softBg: "#F5F3FF",
     quoteBg: "#F8F6FF",
@@ -56,7 +56,7 @@ const THEMES = {
       `margin: 30px 0 16px; padding: 8px 14px; border-left: 4px solid ${c}; background-color: ${soft}; font-size: 17px; font-weight: 700; color: ${c}; border-radius: 6px;`
   },
   "cns-crimson": {
-    name: "CNS 重磅 · 学术红",
+    name: "经典中国红",
     primary: "#B91C1C",
     softBg: "#FEF2F2",
     quoteBg: "#FFF8F8",
@@ -66,7 +66,7 @@ const THEMES = {
       `margin: 30px 0 16px; padding: 7px 14px; border-left: 5px solid ${c}; border-bottom: 1px solid ${soft}; font-size: 17px; font-weight: 700; color: #7F1D1D; background-color: ${soft};`
   },
   "minimal-ink": {
-    name: "极简墨韵 · 深度阅读",
+    name: "极简墨韵黑",
     primary: "#27272A",
     softBg: "#F4F4F5",
     quoteBg: "#F9FAFB",
@@ -527,7 +527,7 @@ function renderWechatArticle(rawMarkdown) {
           `<p style="margin: 4px 0; font-size: 12px; line-height: 1.5; color: #6B7280; word-break: break-all;"><span style="color: ${c}; font-weight: 700;">[${i + 1}]</span> ${escapeHtml(f.text)}: ${escapeHtml(f.href)}</p>`
       )
       .join("");
-    refSec.innerHTML = `<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; color: ${c};">文中参考链接与开源资源</p>${itemsHtml}`;
+    refSec.innerHTML = `<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; color: ${c};">参考链接</p>${itemsHtml}`;
     root.appendChild(refSec);
   }
 
@@ -783,7 +783,7 @@ async function saveCurrentFile({ force = false } = {}) {
   let saveName = state.pendingNewName;
   if (!state.currentFilePath && !saveName) {
     const h1 = (editorEl.value.match(/^\s*#[ \t]+(.+?)[ \t#]*(?:\n|$)/) || [])[1];
-    const defaultName = ((h1 || state.customTitle || "未命名推文").trim().slice(0, 60)) + ".md";
+    const defaultName = ((h1 || state.customTitle || "未命名文章").trim().slice(0, 60)) + ".md";
     const inputName = prompt("请输入保存的文件名：", defaultName);
     if (inputName === null) return;
     saveName = inputName.trim() || defaultName;
@@ -1095,8 +1095,8 @@ const INSERT_SNIPPETS = {
   h2: (s) => `\n## ${s}\n`,
   h3: (s) => `\n### ${s}\n`,
   quote: (s) => `\n> ${s.replace(/\n/g, "\n> ")}\n`,
-  code: (s) => `\n\`\`\`r\n${s}\n\`\`\`\n`,
-  math: (s) => (s === "文本内容" ? "$\\text{HR} = 2.42, p < 0.001$" : `$${s}$`)
+  code: (s) => `\n\`\`\`python\n${s}\n\`\`\`\n`,
+  math: (s) => (s === "文本内容" ? "$E = mc^2$" : `$${s}$`)
 };
 
 function applyInsert(type) {

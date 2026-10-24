@@ -465,7 +465,7 @@ class StudioRequestHandler(SimpleHTTPRequestHandler):
 
         if not file_path:
             # 新文档：保存到工作区，自动避免覆盖同名文件
-            name = safe_filename(body.get("name") or "未命名推文.md")
+            name = safe_filename(body.get("name") or "未命名文章.md")
             if Path(name).suffix.lower() not in TEXT_EXTS:
                 name += ".md"
             p = unique_path(WORKSPACE_DIR / name)
